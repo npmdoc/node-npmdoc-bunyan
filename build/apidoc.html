@@ -1,0 +1,1318 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api-documentation for
+    <a
+
+        href="https://github.com/trentm/node-bunyan#readme"
+
+    >bunyan (v1.8.8)</a>
+</h1>
+<h4>a JSON logging library for node.js services</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan">module bunyan</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer">
+            function <span class="apidocSignatureSpan">bunyan.</span>RingBuffer
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream">
+            function <span class="apidocSignatureSpan">bunyan.</span>RotatingFileStream
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.createLogger">
+            function <span class="apidocSignatureSpan">bunyan.</span>createLogger
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.resolveLevel">
+            function <span class="apidocSignatureSpan">bunyan.</span>resolveLevel
+            <span class="apidocSignatureSpan">(nameOrNum)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.safeCycles">
+            function <span class="apidocSignatureSpan">bunyan.</span>safeCycles
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.super_">
+            function <span class="apidocSignatureSpan">bunyan.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>DEBUG</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>FATAL</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>INFO</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>LOG_VERSION</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>TRACE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">bunyan.</span>WARN</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">bunyan.</span>RingBuffer.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">bunyan.</span>RotatingFileStream.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">bunyan.</span>levelFromName</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">bunyan.</span>nameFromLevel</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">bunyan.</span>stdSerializers</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">bunyan.</span>VERSION</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan.RingBuffer">module bunyan.RingBuffer</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.RingBuffer">
+            function <span class="apidocSignatureSpan">bunyan.</span>RingBuffer
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.super_">
+            function <span class="apidocSignatureSpan">bunyan.RingBuffer.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan.RingBuffer.prototype">module bunyan.RingBuffer.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.prototype.destroy">
+            function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>destroy
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.prototype.destroySoon">
+            function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>destroySoon
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.prototype.end">
+            function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>end
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RingBuffer.prototype.write">
+            function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>write
+            <span class="apidocSignatureSpan">(record)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan.RotatingFileStream">module bunyan.RotatingFileStream</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.RotatingFileStream">
+            function <span class="apidocSignatureSpan">bunyan.</span>RotatingFileStream
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.super_">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan.RotatingFileStream.prototype">module bunyan.RotatingFileStream.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype._calcRotTime">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_calcRotTime
+            <span class="apidocSignatureSpan">(periodOffset)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype._debug">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_debug
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype._setRotationTimer">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_setRotationTimer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype._setupNextRot">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_setupNextRot
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype.destroy">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>destroy
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype.destroySoon">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>destroySoon
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype.end">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>end
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype.rotate">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>rotate
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.RotatingFileStream.prototype.write">
+            function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>write
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.bunyan.stdSerializers">module bunyan.stdSerializers</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.stdSerializers.err">
+            function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>err
+            <span class="apidocSignatureSpan">(err)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.stdSerializers.req">
+            function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>req
+            <span class="apidocSignatureSpan">(req)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.bunyan.stdSerializers.res">
+            function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>res
+            <span class="apidocSignatureSpan">(res)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan" id="apidoc.module.bunyan">module bunyan</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer" id="apidoc.element.bunyan.RingBuffer">
+        function <span class="apidocSignatureSpan">bunyan.</span>RingBuffer
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RingBuffer(options) {
+    this.limit = options &#x26;&#x26; options.limit ? options.limit : 100;
+    this.writable = true;
+    this.records = [];
+    EventEmitter.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+own HTTP interface, or a post-mortem facility like MDB or node-panic.
+
+To use a RingBuffer:
+
+```js
+/* Create a ring buffer that stores the last 100 records. */
+var bunyan = require(&#x27;bunyan&#x27;);
+var ringbuffer = new bunyan.<span class="apidocCodeKeywordSpan">RingBuffer</span>({ limit: 100 });
+var log = bunyan.createLogger({
+name: &#x27;foo&#x27;,
+streams: [
+    {
+        level: &#x27;info&#x27;,
+        stream: process.stdout
+    },
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream" id="apidoc.element.bunyan.RotatingFileStream">
+        function <span class="apidocSignatureSpan">bunyan.</span>RotatingFileStream
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RotatingFileStream(options) {
+    this.path = options.path;
+
+    this.count = (options.count == null ? 10 : options.count);
+    assert.equal(typeof (this.count), &#x27;number&#x27;,
+        format(&#x27;rotating-file stream &#x22;count&#x22; is not a number: %j (%s) in %j&#x27;,
+            this.count, typeof (this.count), this));
+    assert.ok(this.count &#x3e;= 0,
+        format(&#x27;rotating-file stream &#x22;count&#x22; is not &#x3e;= 0: %j in %j&#x27;,
+            this.count, this));
+
+    // Parse `options.period`.
+    if (options.period) {
+        // &#x3c;number&#x3e;&#x3c;scope&#x3e; where scope is:
+        //    h   hours (at the start of the hour)
+        //    d   days (at the start of the day, i.e. just after midnight)
+        //    w   weeks (at the start of Sunday)
+        //    m   months (on the first of the month)
+        //    y   years (at the start of Jan 1st)
+        // with special values &#x27;hourly&#x27; (1h), &#x27;daily&#x27; (1d), &#x22;weekly&#x22; (1w),
+        // &#x27;monthly&#x27; (1m) and &#x27;yearly&#x27; (1y)
+        var period = {
+            &#x27;hourly&#x27;: &#x27;1h&#x27;,
+            &#x27;daily&#x27;: &#x27;1d&#x27;,
+            &#x27;weekly&#x27;: &#x27;1w&#x27;,
+            &#x27;monthly&#x27;: &#x27;1m&#x27;,
+            &#x27;yearly&#x27;: &#x27;1y&#x27;
+        }[options.period] || options.period;
+        var m = /^([1-9][0-9]*)([hdwmy]|ms)$/.exec(period);
+        if (!m) {
+            throw new Error(format(&#x27;invalid period: &#x22;%s&#x22;&#x27;, options.period));
+        }
+        this.periodNum = Number(m[1]);
+        this.periodScope = m[2];
+    } else {
+        this.periodNum = 1;
+        this.periodScope = &#x27;d&#x27;;
+    }
+
+    var lastModified = null;
+    try {
+        var fileInfo = fs.statSync(this.path);
+        lastModified = fileInfo.mtime.getTime();
+    }
+    catch (err) {
+        // file doesn&#x27;t exist
+    }
+    var rotateAfterOpen = false;
+    if (lastModified) {
+        var lastRotTime = this._calcRotTime(0);
+        if (lastModified &#x3c; lastRotTime) {
+            rotateAfterOpen = true;
+        }
+    }
+
+    // TODO: template support for backup files
+    // template: &#x3c;path to which to rotate&#x3e;
+    //      default is %P.%n
+    //      &#x27;/var/log/archive/foo.log&#x27;  -&#x3e; foo.log.%n
+    //      &#x27;/var/log/archive/foo.log.%n&#x27;
+    //      codes:
+    //          XXX support strftime codes (per node version of those)
+    //              or whatever module. Pick non-colliding for extra
+    //              codes
+    //          %P      `path` base value
+    //          %n      integer number of rotated log (1,2,3,...)
+    //          %d      datetime in YYYY-MM-DD_HH-MM-SS
+    //                      XXX what should default date format be?
+    //                          prior art? Want to avoid &#x27;:&#x27; in
+    //                          filenames (illegal on Windows for one).
+
+    this.stream = fs.createWriteStream(this.path,
+        {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+
+    this.rotQueue = [];
+    this.rotating = false;
+    if (rotateAfterOpen) {
+        this._debug(&#x27;rotateAfterOpen -&#x3e; call rotate()&#x27;);
+        this.rotate();
+    } else {
+        this._setupNextRot();
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.createLogger" id="apidoc.element.bunyan.createLogger">
+        function <span class="apidocSignatureSpan">bunyan.</span>createLogger
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createLogger(options) {
+    return new Logger(options);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+[![npm version](https://img.shields.io/npm/v/bunyan.svg?style=flat)](https://www.npmjs.com/package/bunyan)
+
+Bunyan is **a simple and fast JSON logging library** for node.js services:
+
+```js
+var bunyan = require(&#x27;bunyan&#x27;);
+var log = bunyan.<span class="apidocCodeKeywordSpan">createLogger</span>({name: &#x22;myapp&#x22;});
+log.info(&#x22;hi&#x22;);
+```
+
+and **a `bunyan` CLI tool** for nicely viewing those logs:
+
+![bunyan CLI screenshot](https://raw.github.com/trentm/node-bunyan/master/tools/screenshot1.png)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.resolveLevel" id="apidoc.element.bunyan.resolveLevel">
+        function <span class="apidocSignatureSpan">bunyan.</span>resolveLevel
+        <span class="apidocSignatureSpan">(nameOrNum)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function resolveLevel(nameOrNum) {
+    var level;
+    var type = typeof (nameOrNum);
+    if (type === &#x27;string&#x27;) {
+        level = levelFromName[nameOrNum.toLowerCase()];
+        if (!level) {
+            throw new Error(format(&#x27;unknown level name: &#x22;%s&#x22;&#x27;, nameOrNum));
+        }
+    } else if (type !== &#x27;number&#x27;) {
+        throw new TypeError(format(&#x27;cannot resolve level: invalid arg (%s):&#x27;,
+            type, nameOrNum));
+    } else if (nameOrNum &#x3c; 0 || Math.floor(nameOrNum) !== nameOrNum) {
+        throw new TypeError(format(&#x27;level is not a positive integer: %s&#x27;,
+            nameOrNum));
+    } else {
+        level = nameOrNum;
+    }
+    return level;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.safeCycles" id="apidoc.element.bunyan.safeCycles">
+        function <span class="apidocSignatureSpan">bunyan.</span>safeCycles
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function safeCyclesSet() {
+    var seen = new Set();
+    return function (key, val) {
+        if (!val || typeof (val) !== &#x27;object&#x27;) {
+            return val;
+        }
+        if (seen.has(val)) {
+            return &#x27;[Circular]&#x27;;
+        }
+        seen.add(val);
+        return val;
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.super_" id="apidoc.element.bunyan.super_">
+        function <span class="apidocSignatureSpan">bunyan.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan.RingBuffer" id="apidoc.module.bunyan.RingBuffer">module bunyan.RingBuffer</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.RingBuffer" id="apidoc.element.bunyan.RingBuffer.RingBuffer">
+        function <span class="apidocSignatureSpan">bunyan.</span>RingBuffer
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RingBuffer(options) {
+    this.limit = options &#x26;&#x26; options.limit ? options.limit : 100;
+    this.writable = true;
+    this.records = [];
+    EventEmitter.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+own HTTP interface, or a post-mortem facility like MDB or node-panic.
+
+To use a RingBuffer:
+
+```js
+/* Create a ring buffer that stores the last 100 records. */
+var bunyan = require(&#x27;bunyan&#x27;);
+var ringbuffer = new bunyan.<span class="apidocCodeKeywordSpan">RingBuffer</span>({ limit: 100 });
+var log = bunyan.createLogger({
+name: &#x27;foo&#x27;,
+streams: [
+    {
+        level: &#x27;info&#x27;,
+        stream: process.stdout
+    },
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.super_" id="apidoc.element.bunyan.RingBuffer.super_">
+        function <span class="apidocSignatureSpan">bunyan.RingBuffer.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan.RingBuffer.prototype" id="apidoc.module.bunyan.RingBuffer.prototype">module bunyan.RingBuffer.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.prototype.destroy" id="apidoc.element.bunyan.RingBuffer.prototype.destroy">
+        function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>destroy
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">destroy = function () {
+    this.writable = false;
+    this.emit(&#x27;close&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.prototype.destroySoon" id="apidoc.element.bunyan.RingBuffer.prototype.destroySoon">
+        function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>destroySoon
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">destroySoon = function () {
+    this.destroy();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.prototype.end" id="apidoc.element.bunyan.RingBuffer.prototype.end">
+        function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>end
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">end = function () {
+    if (arguments.length &#x3e; 0)
+        this.write.apply(this, Array.prototype.slice.call(arguments));
+    this.writable = false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RingBuffer.prototype.write" id="apidoc.element.bunyan.RingBuffer.prototype.write">
+        function <span class="apidocSignatureSpan">bunyan.RingBuffer.prototype.</span>write
+        <span class="apidocSignatureSpan">(record)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">write = function (record) {
+    if (!this.writable)
+        throw (new Error(&#x27;RingBuffer has been ended already&#x27;));
+
+    this.records.push(record);
+
+    if (this.records.length &#x3e; this.limit)
+        this.records.shift();
+
+    return (true);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan.RotatingFileStream" id="apidoc.module.bunyan.RotatingFileStream">module bunyan.RotatingFileStream</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.RotatingFileStream" id="apidoc.element.bunyan.RotatingFileStream.RotatingFileStream">
+        function <span class="apidocSignatureSpan">bunyan.</span>RotatingFileStream
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RotatingFileStream(options) {
+    this.path = options.path;
+
+    this.count = (options.count == null ? 10 : options.count);
+    assert.equal(typeof (this.count), &#x27;number&#x27;,
+        format(&#x27;rotating-file stream &#x22;count&#x22; is not a number: %j (%s) in %j&#x27;,
+            this.count, typeof (this.count), this));
+    assert.ok(this.count &#x3e;= 0,
+        format(&#x27;rotating-file stream &#x22;count&#x22; is not &#x3e;= 0: %j in %j&#x27;,
+            this.count, this));
+
+    // Parse `options.period`.
+    if (options.period) {
+        // &#x3c;number&#x3e;&#x3c;scope&#x3e; where scope is:
+        //    h   hours (at the start of the hour)
+        //    d   days (at the start of the day, i.e. just after midnight)
+        //    w   weeks (at the start of Sunday)
+        //    m   months (on the first of the month)
+        //    y   years (at the start of Jan 1st)
+        // with special values &#x27;hourly&#x27; (1h), &#x27;daily&#x27; (1d), &#x22;weekly&#x22; (1w),
+        // &#x27;monthly&#x27; (1m) and &#x27;yearly&#x27; (1y)
+        var period = {
+            &#x27;hourly&#x27;: &#x27;1h&#x27;,
+            &#x27;daily&#x27;: &#x27;1d&#x27;,
+            &#x27;weekly&#x27;: &#x27;1w&#x27;,
+            &#x27;monthly&#x27;: &#x27;1m&#x27;,
+            &#x27;yearly&#x27;: &#x27;1y&#x27;
+        }[options.period] || options.period;
+        var m = /^([1-9][0-9]*)([hdwmy]|ms)$/.exec(period);
+        if (!m) {
+            throw new Error(format(&#x27;invalid period: &#x22;%s&#x22;&#x27;, options.period));
+        }
+        this.periodNum = Number(m[1]);
+        this.periodScope = m[2];
+    } else {
+        this.periodNum = 1;
+        this.periodScope = &#x27;d&#x27;;
+    }
+
+    var lastModified = null;
+    try {
+        var fileInfo = fs.statSync(this.path);
+        lastModified = fileInfo.mtime.getTime();
+    }
+    catch (err) {
+        // file doesn&#x27;t exist
+    }
+    var rotateAfterOpen = false;
+    if (lastModified) {
+        var lastRotTime = this._calcRotTime(0);
+        if (lastModified &#x3c; lastRotTime) {
+            rotateAfterOpen = true;
+        }
+    }
+
+    // TODO: template support for backup files
+    // template: &#x3c;path to which to rotate&#x3e;
+    //      default is %P.%n
+    //      &#x27;/var/log/archive/foo.log&#x27;  -&#x3e; foo.log.%n
+    //      &#x27;/var/log/archive/foo.log.%n&#x27;
+    //      codes:
+    //          XXX support strftime codes (per node version of those)
+    //              or whatever module. Pick non-colliding for extra
+    //              codes
+    //          %P      `path` base value
+    //          %n      integer number of rotated log (1,2,3,...)
+    //          %d      datetime in YYYY-MM-DD_HH-MM-SS
+    //                      XXX what should default date format be?
+    //                          prior art? Want to avoid &#x27;:&#x27; in
+    //                          filenames (illegal on Windows for one).
+
+    this.stream = fs.createWriteStream(this.path,
+        {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+
+    this.rotQueue = [];
+    this.rotating = false;
+    if (rotateAfterOpen) {
+        this._debug(&#x27;rotateAfterOpen -&#x3e; call rotate()&#x27;);
+        this.rotate();
+    } else {
+        this._setupNextRot();
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.super_" id="apidoc.element.bunyan.RotatingFileStream.super_">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan.RotatingFileStream.prototype" id="apidoc.module.bunyan.RotatingFileStream.prototype">module bunyan.RotatingFileStream.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype._calcRotTime" id="apidoc.element.bunyan.RotatingFileStream.prototype._calcRotTime">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_calcRotTime
+        <span class="apidocSignatureSpan">(periodOffset)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function _calcRotTime(periodOffset) {
+    this._debug(&#x27;_calcRotTime: %s%s&#x27;, this.periodNum, this.periodScope);
+    var d = new Date();
+
+    this._debug(&#x27;  now local: %s&#x27;, d);
+    this._debug(&#x27;    now utc: %s&#x27;, d.toISOString());
+    var rotAt;
+    switch (this.periodScope) {
+    case &#x27;ms&#x27;:
+        // Hidden millisecond period for debugging.
+        if (this.rotAt) {
+            rotAt = this.rotAt + this.periodNum * periodOffset;
+        } else {
+            rotAt = Date.now() + this.periodNum * periodOffset;
+        }
+        break;
+    case &#x27;h&#x27;:
+        if (this.rotAt) {
+            rotAt = this.rotAt + this.periodNum * 60 * 60 * 1000 * periodOffset;
+        } else {
+            // First time: top of the next hour.
+            rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
+                d.getUTCDate(), d.getUTCHours() + periodOffset);
+        }
+        break;
+    case &#x27;d&#x27;:
+        if (this.rotAt) {
+            rotAt = this.rotAt + this.periodNum * 24 * 60 * 60 * 1000
+                * periodOffset;
+        } else {
+            // First time: start of tomorrow (i.e. at the coming midnight) UTC.
+            rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
+                d.getUTCDate() + periodOffset);
+        }
+        break;
+    case &#x27;w&#x27;:
+        // Currently, always on Sunday morning at 00:00:00 (UTC).
+        if (this.rotAt) {
+            rotAt = this.rotAt + this.periodNum * 7 * 24 * 60 * 60 * 1000
+                * periodOffset;
+        } else {
+            // First time: this coming Sunday.
+            var dayOffset = (7 - d.getUTCDay());
+            if (periodOffset &#x3c; 1) {
+                dayOffset = -d.getUTCDay();
+            }
+            if (periodOffset &#x3e; 1 || periodOffset &#x3c; -1) {
+                dayOffset += 7 * periodOffset;
+            }
+            rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
+                d.getUTCDate() + dayOffset);
+        }
+        break;
+    case &#x27;m&#x27;:
+        if (this.rotAt) {
+            rotAt = Date.UTC(d.getUTCFullYear(),
+                d.getUTCMonth() + this.periodNum * periodOffset, 1);
+        } else {
+            // First time: the start of the next month.
+            rotAt = Date.UTC(d.getUTCFullYear(),
+                d.getUTCMonth() + periodOffset, 1);
+        }
+        break;
+    case &#x27;y&#x27;:
+        if (this.rotAt) {
+            rotAt = Date.UTC(d.getUTCFullYear() + this.periodNum * periodOffset,
+                0, 1);
+        } else {
+            // First time: the start of the next year.
+            rotAt = Date.UTC(d.getUTCFullYear() + periodOffset, 0, 1);
+        }
+        break;
+    default:
+        assert.fail(format(&#x27;invalid period scope: &#x22;%s&#x22;&#x27;, this.periodScope));
+    }
+
+    if (this._debug()) {
+        this._debug(&#x27;  **rotAt**: %s (utc: %s)&#x27;, rotAt,
+            new Date(rotAt).toUTCString());
+        var now = Date.now();
+        this._debug(&#x27;        now: %s (%sms == %smin == %sh to go)&#x27;,
+            now,
+            rotAt - now,
+            (rotAt-now)/1000/60,
+            (rotAt-now)/1000/60/60);
+    }
+    return rotAt;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype._debug" id="apidoc.element.bunyan.RotatingFileStream.prototype._debug">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_debug
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_debug = function () {
+    // Set this to `true` to add debug logging.
+    if (false) {
+        if (arguments.length === 0) {
+            return true;
+        }
+        var args = Array.prototype.slice.call(arguments);
+        args[0] = &#x27;[&#x27; + (new Date().toISOString()) + &#x27;, &#x27;
+            + this.path + &#x27;] &#x27; + args[0];
+        console.log.apply(this, args);
+    } else {
+        return false;
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype._setRotationTimer" id="apidoc.element.bunyan.RotatingFileStream.prototype._setRotationTimer">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_setRotationTimer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_setRotationTimer = function () {
+    var self = this;
+    var delay = this.rotAt - Date.now();
+    // Cap timeout to Node&#x27;s max setTimeout, see
+    // &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
+    var TIMEOUT_MAX = 2147483647; // 2^31-1
+    if (delay &#x3e; TIMEOUT_MAX) {
+        delay = TIMEOUT_MAX;
+    }
+    this.timeout = setTimeout(
+        function () {
+            self._debug(&#x27;_setRotationTimer timeout -&#x3e; call rotate()&#x27;);
+            self.rotate();
+        },
+        delay);
+    if (typeof (this.timeout.unref) === &#x27;function&#x27;) {
+        this.timeout.unref();
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype._setupNextRot" id="apidoc.element.bunyan.RotatingFileStream.prototype._setupNextRot">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>_setupNextRot
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_setupNextRot = function () {
+    this.rotAt = this._calcRotTime(1);
+    this._setRotationTimer();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype.destroy" id="apidoc.element.bunyan.RotatingFileStream.prototype.destroy">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>destroy
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function destroy(s) {
+    this.stream.destroy();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype.destroySoon" id="apidoc.element.bunyan.RotatingFileStream.prototype.destroySoon">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>destroySoon
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function destroySoon(s) {
+    this.stream.destroySoon();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype.end" id="apidoc.element.bunyan.RotatingFileStream.prototype.end">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>end
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function end(s) {
+    this.stream.end();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype.rotate" id="apidoc.element.bunyan.RotatingFileStream.prototype.rotate">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>rotate
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function rotate() {
+    // XXX What about shutdown?
+    var self = this;
+
+    // If rotation period is &#x3e; ~25 days, we have to break into multiple
+    // setTimeout&#x27;s. See &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
+    if (self.rotAt &#x26;&#x26; self.rotAt &#x3e; Date.now()) {
+        return self._setRotationTimer();
+    }
+
+    this._debug(&#x27;rotate&#x27;);
+    if (self.rotating) {
+        throw new TypeError(&#x27;cannot start a rotation when already rotating&#x27;);
+    }
+    self.rotating = true;
+
+    self.stream.end();  // XXX can do moves sync after this? test at high rate
+
+    function del() {
+        var toDel = self.path + &#x27;.&#x27; + String(n - 1);
+        if (n === 0) {
+            toDel = self.path;
+        }
+        n -= 1;
+        self._debug(&#x27;  rm %s&#x27;, toDel);
+        fs.unlink(toDel, function (delErr) {
+            //XXX handle err other than not exists
+            moves();
+        });
+    }
+
+    function moves() {
+        if (self.count === 0 || n &#x3c; 0) {
+            return finish();
+        }
+        var before = self.path;
+        var after = self.path + &#x27;.&#x27; + String(n);
+        if (n &#x3e; 0) {
+            before += &#x27;.&#x27; + String(n - 1);
+        }
+        n -= 1;
+        fs.exists(before, function (exists) {
+            if (!exists) {
+                moves();
+            } else {
+                self._debug(&#x27;  mv %s %s&#x27;, before, after);
+                mv(before, after, function (mvErr) {
+                    if (mvErr) {
+                        self.emit(&#x27;error&#x27;, mvErr);
+                        finish(); // XXX finish here?
+                    } else {
+                        moves();
+                    }
+                });
+            }
+        })
+    }
+
+    function finish() {
+        self._debug(&#x27;  open %s&#x27;, self.path);
+        self.stream = fs.createWriteStream(self.path,
+            {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+        var q = self.rotQueue, len = q.length;
+        for (var i = 0; i &#x3c; len; i++) {
+            self.stream.write(q[i]);
+        }
+        self.rotQueue = [];
+        self.rotating = false;
+        self.emit(&#x27;drain&#x27;);
+        self._setupNextRot();
+    }
+
+    var n = this.count;
+    del();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.RotatingFileStream.prototype.write" id="apidoc.element.bunyan.RotatingFileStream.prototype.write">
+        function <span class="apidocSignatureSpan">bunyan.RotatingFileStream.prototype.</span>write
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function write(s) {
+    if (this.rotating) {
+        this.rotQueue.push(s);
+        return false;
+    } else {
+        return this.stream.write(s);
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.bunyan.stdSerializers" id="apidoc.module.bunyan.stdSerializers">module bunyan.stdSerializers</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.stdSerializers.err" id="apidoc.element.bunyan.stdSerializers.err">
+        function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>err
+        <span class="apidocSignatureSpan">(err)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function err(err) {
+    if (!err || !err.stack)
+        return err;
+    var obj = {
+        message: err.message,
+        name: err.name,
+        stack: getFullErrorStack(err),
+        code: err.code,
+        signal: err.signal
+    }
+    return obj;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.stdSerializers.req" id="apidoc.element.bunyan.stdSerializers.req">
+        function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>req
+        <span class="apidocSignatureSpan">(req)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function req(req) {
+    if (!req || !req.connection)
+        return req;
+    return {
+        method: req.method,
+        url: req.url,
+        headers: req.headers,
+        remoteAddress: req.connection.remoteAddress,
+        remotePort: req.connection.remotePort
+    };
+    // Trailers: Skipping for speed. If you need trailers in your app, then
+    // make a custom serializer.
+    //if (Object.keys(trailers).length &#x3e; 0) {
+    //  obj.trailers = req.trailers;
+    //}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.bunyan.stdSerializers.res" id="apidoc.element.bunyan.stdSerializers.res">
+        function <span class="apidocSignatureSpan">bunyan.stdSerializers.</span>res
+        <span class="apidocSignatureSpan">(res)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function res(res) {
+    if (!res || !res.statusCode)
+        return res;
+    return {
+        statusCode: res.statusCode,
+        header: res._header
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
