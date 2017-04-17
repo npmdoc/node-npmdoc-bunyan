@@ -1,21 +1,21 @@
 <svg height="286" width="720" xmlns="http://www.w3.org/2000/svg">
 <rect height="286" fill="#555" width="720"></rect>
 <text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
-<tspan x="10" y="26">  0.  2017-04-17 11:15:57 +0000   447648 bytes  .</tspan>
-<tspan x="10" y="42">  1.  2017-04-17 11:15:57 +0000     1828 bytes  AUTHORS</tspan>
-<tspan x="10" y="58">  2.  2017-04-17 11:15:57 +0000    45255 bytes  CHANGES.md</tspan>
-<tspan x="10" y="74">  3.  2017-04-17 11:15:57 +0000     8950 bytes  CONTRIBUTING.md</tspan>
-<tspan x="10" y="90">  4.  2017-04-17 11:15:57 +0000     1105 bytes  LICENSE.txt</tspan>
-<tspan x="10" y="106">  5.  2017-04-17 11:15:57 +0000     5673 bytes  Makefile</tspan>
-<tspan x="10" y="122">  6.  2017-04-17 11:15:57 +0000    45761 bytes  README.md</tspan>
-<tspan x="10" y="138">  7.  2017-04-17 11:15:57 +0000     5516 bytes  TODO.md</tspan>
-<tspan x="10" y="154">  8.  2017-04-17 11:15:57 +0000    54421 bytes  bin/bunyan</tspan>
-<tspan x="10" y="170">  9.  2017-04-17 11:15:57 +0000     6691 bytes  docs/bunyan.1</tspan>
-<tspan x="10" y="186"> 10.  2017-04-17 11:15:57 +0000    11769 bytes  docs/bunyan.1.html</tspan>
-<tspan x="10" y="202"> 11.  2017-04-17 11:15:57 +0000     6054 bytes  docs/bunyan.1.ronn</tspan>
-<tspan x="10" y="218"> 12.  2017-04-17 11:15:57 +0000   198704 bytes  docs/img/bunyan.browserify.png</tspan>
-<tspan x="10" y="234"> 13.  2017-04-17 11:15:57 +0000       47 bytes  docs/index.html</tspan>
-<tspan x="10" y="250"> 14.  2017-04-17 11:15:57 +0000    49475 bytes  lib/bunyan.js</tspan>
-<tspan x="10" y="266"> 15.  2017-04-17 11:15:57 +0000     6399 bytes  package.json</tspan>
+<tspan x="10" y="26">  0.  2017-04-17 11:16:54 +0000   447648 bytes  .</tspan>
+<tspan x="10" y="42">  1.  2017-04-17 11:16:54 +0000     1828 bytes  AUTHORS</tspan>
+<tspan x="10" y="58">  2.  2017-04-17 11:16:54 +0000    45255 bytes  CHANGES.md</tspan>
+<tspan x="10" y="74">  3.  2017-04-17 11:16:54 +0000     8950 bytes  CONTRIBUTING.md</tspan>
+<tspan x="10" y="90">  4.  2017-04-17 11:16:54 +0000     1105 bytes  LICENSE.txt</tspan>
+<tspan x="10" y="106">  5.  2017-04-17 11:16:54 +0000     5673 bytes  Makefile</tspan>
+<tspan x="10" y="122">  6.  2017-04-17 11:16:54 +0000    45761 bytes  README.md</tspan>
+<tspan x="10" y="138">  7.  2017-04-17 11:16:54 +0000     5516 bytes  TODO.md</tspan>
+<tspan x="10" y="154">  8.  2017-04-17 11:16:54 +0000    54421 bytes  bin/bunyan</tspan>
+<tspan x="10" y="170">  9.  2017-04-17 11:16:54 +0000     6691 bytes  docs/bunyan.1</tspan>
+<tspan x="10" y="186"> 10.  2017-04-17 11:16:54 +0000    11769 bytes  docs/bunyan.1.html</tspan>
+<tspan x="10" y="202"> 11.  2017-04-17 11:16:54 +0000     6054 bytes  docs/bunyan.1.ronn</tspan>
+<tspan x="10" y="218"> 12.  2017-04-17 11:16:54 +0000   198704 bytes  docs/img/bunyan.browserify.png</tspan>
+<tspan x="10" y="234"> 13.  2017-04-17 11:16:54 +0000       47 bytes  docs/index.html</tspan>
+<tspan x="10" y="250"> 14.  2017-04-17 11:16:54 +0000    49475 bytes  lib/bunyan.js</tspan>
+<tspan x="10" y="266"> 15.  2017-04-17 11:16:54 +0000     6399 bytes  package.json</tspan>
 </text>
 </svg>
