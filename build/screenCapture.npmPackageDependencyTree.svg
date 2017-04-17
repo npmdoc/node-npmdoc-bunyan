@@ -6,7 +6,7 @@
 <tspan x="10" y="58">node_modules</tspan>
 <tspan x="10" y="74">└─┬ bunyan@1.8.10 </tspan>
 <tspan x="10" y="90">  ├─┬ dtrace-provider@0.8.1 </tspan>
-<tspan x="10" y="106">  │ └── nan@2.6.1 </tspan>
+<tspan x="10" y="106">  │ └── nan@2.6.2 </tspan>
 <tspan x="10" y="122">  ├── moment@2.18.1 </tspan>
 <tspan x="10" y="138">  ├─┬ mv@2.1.1 </tspan>
 <tspan x="10" y="154">  │ ├─┬ mkdirp@0.5.1 </tspan>

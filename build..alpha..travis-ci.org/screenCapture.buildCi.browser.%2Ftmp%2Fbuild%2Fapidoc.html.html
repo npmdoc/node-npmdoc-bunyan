@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/trentm/node-bunyan#readme"
-
-    >bunyan (v1.8.10)</a>
+    <a href="https://github.com/trentm/node-bunyan#readme">bunyan (v1.8.10)</a>
 </h1>
 <h4>a JSON logging library for node.js services</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.bunyan">module bunyan</a><ol>
 
@@ -831,7 +824,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function Logger(options, _childOptions, _childSimple) {
-    xxx(&#x27;Logger start:&#x27;, options)
+    xxx('Logger start:', options)
     if (!(this instanceof Logger)) {
         return new Logger(options, _childOptions);
     }
@@ -843,37 +836,37 @@
         options = _childOptions;
         if (!(parent instanceof Logger)) {
             throw new TypeError(
-                &#x27;invalid Logger creation: do not pass a second arg&#x27;);
+                'invalid Logger creation: do not pass a second arg');
         }
     }
     if (!options) {
-        throw new TypeError(&#x27;options (object) is required&#x27;);
+        throw new TypeError('options (object) is required');
     }
     if (!parent) {
         if (!options.name) {
-            throw new TypeError(&#x27;options.name (string) is required&#x27;);
+            throw new TypeError('options.name (string) is required');
         }
     } else {
         if (options.name) {
             throw new TypeError(
-                &#x27;invalid options.name: child cannot set logger name&#x27;);
+                'invalid options.name: child cannot set logger name');
         }
     }
-    if (options.stream &#x26;&#x26; options.streams) {
-        throw new TypeError(&#x27;cannot mix &#x22;streams&#x22; and &#x22;stream&#x22; options&#x27;);
+    if (options.stream &amp;&amp; options.streams) {
+        throw new TypeError('cannot mix "streams" and "stream" options');
     }
-    if (options.streams &#x26;&#x26; !Array.isArray(options.streams)) {
-        throw new TypeError(&#x27;invalid options.streams: must be an array&#x27;)
+    if (options.streams &amp;&amp; !Array.isArray(options.streams)) {
+        throw new TypeError('invalid options.streams: must be an array')
     }
-    if (options.serializers &#x26;&#x26; (typeof (options.serializers) !== &#x27;object&#x27; ||
+    if (options.serializers &amp;&amp; (typeof (options.serializers) !== 'object' ||
             Array.isArray(options.serializers))) {
-        throw new TypeError(&#x27;invalid options.serializers: must be an object&#x27;)
+        throw new TypeError('invalid options.serializers: must be an object')
     }
 
     EventEmitter.call(this);
 
     // Fast path for simple child creation.
-    if (parent &#x26;&#x26; _childSimple) {
+    if (parent &amp;&amp; _childSimple) {
         // `_isSimpleChild` is a signal to stream close handling that this child
         // owns none of its streams.
         this._isSimpleChild = true;
@@ -884,12 +877,12 @@
         this.src = parent.src;
         var fields = this.fields = {};
         var parentFieldNames = Object.keys(parent.fields);
-        for (var i = 0; i &#x3c; parentFieldNames.length; i++) {
+        for (var i = 0; i &lt; parentFieldNames.length; i++) {
             var name = parentFieldNames[i];
             fields[name] = parent.fields[name];
         }
         var names = Object.keys(options);
-        for (var i = 0; i &#x3c; names.length; i++) {
+        for (var i = 0; i &lt; names.length; i++) {
             var name = names[i];
             fields[name] = options[name];
         }
@@ -901,9 +894,9 @@
     if (parent) {
         this._level = parent._level;
         this.streams = [];
-        for (var i = 0; i &#x3c; parent.streams.length; i++) {
+        for (var i = 0; i &lt; parent.streams.length; i++) {
             var s = objCopy(parent.streams[i]);
-            s.closeOnExit = false; // Don&#x27;t own parent stream.
+            s.closeOnExit = false; // Don't own parent stream.
             this.streams.push(s);
         }
         this.serializers = objCopy(parent.serializers);
@@ -920,16 +913,16 @@
         this.fields = {};
     }
 
-    if (!dtp &#x26;&#x26; dtrace) {
-        dtp = dtrace.createDTraceProvider(&#x27;bunyan&#x27;);
+    if (!dtp &amp;&amp; dtrace) {
+        dtp = dtrace.createDTraceProvider('bunyan');
 
         for (var level in levelFromName) {
             var probe;
 
             probes[levelFromName[level]] = probe =
-                dtp.addProbe(&#x27;log-&#x27; + level, &#x27;char *&#x27;);
+                dtp.addProbe('log-' + level, 'char *');
 
-            // Explicitly add a reference to dtp to prevent it from being GC&#x27;d
+            // Explicitly add a reference to dtp to prevent it from being GC'd
             probe.dtp = dtp;
         }
 
@@ -940,7 +933,7 @@
     // for log records).
     if (options.stream) {
         self.addStream({
-            type: &#x27;stream&#x27;,
+            type: 'stream',
             stream: options.stream,
             closeOnExit: false,
             level: options.level
@@ -949,12 +942,12 @@
         options.streams.forEach(function (s) {
             self.addStream(s, options.level);
         });
-    } else if (parent &#x26;&#x26; options.level) {
+    } else if (parent &amp;&amp; options.level) {
         this.level(options.level);
     } else if (!parent) {
-        if (runtimeEnv === &#x27;browser&#x27;) {
+        if (runtimeEnv === 'browser') {
             /*
-             * In the browser we&#x27;ll be emitting to console.log by default.
+             * In the browser we'll be emitting to console.log by default.
              * Any console.log worth its salt these days can nicely render ...</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -969,7 +962,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function RingBuffer(options) {
-    this.limit = options &#x26;&#x26; options.limit ? options.limit : 100;
+    this.limit = options &amp;&amp; options.limit ? options.limit : 100;
     this.writable = true;
     this.records = [];
     EventEmitter.call(this);
@@ -981,13 +974,13 @@ To use a RingBuffer:
 
 ```js
 /* Create a ring buffer that stores the last 100 records. */
-var bunyan = require(&#x27;bunyan&#x27;);
+var bunyan = require('bunyan');
 var ringbuffer = new bunyan.<span class="apidocCodeKeywordSpan">RingBuffer</span>({ limit: 100 });
 var log = bunyan.createLogger({
-name: &#x27;foo&#x27;,
+name: 'foo',
 streams: [
     {
-        level: &#x27;info&#x27;,
+        level: 'info',
         stream: process.stdout
     },
 ...</pre></li>
@@ -1004,7 +997,7 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">RingBuffer.prototype.destroy = function () {
     this.writable = false;
-    this.emit(&#x27;close&#x27;);
+    this.emit('close');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1034,7 +1027,7 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">RingBuffer.prototype.end = function () {
-    if (arguments.length &#x3e; 0)
+    if (arguments.length &gt; 0)
         this.write.apply(this, Array.prototype.slice.call(arguments));
     this.writable = false;
 }</pre></li>
@@ -1052,11 +1045,11 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">RingBuffer.prototype.write = function (record) {
     if (!this.writable)
-        throw (new Error(&#x27;RingBuffer has been ended already&#x27;));
+        throw (new Error('RingBuffer has been ended already'));
 
     this.records.push(record);
 
-    if (this.records.length &#x3e; this.limit)
+    if (this.records.length &gt; this.limit)
         this.records.shift();
 
     return (true);
@@ -1077,39 +1070,39 @@ streams: [
     this.path = options.path;
 
     this.count = (options.count == null ? 10 : options.count);
-    assert.equal(typeof (this.count), &#x27;number&#x27;,
-        format(&#x27;rotating-file stream &#x22;count&#x22; is not a number: %j (%s) in %j&#x27;,
+    assert.equal(typeof (this.count), 'number',
+        format('rotating-file stream "count" is not a number: %j (%s) in %j',
             this.count, typeof (this.count), this));
-    assert.ok(this.count &#x3e;= 0,
-        format(&#x27;rotating-file stream &#x22;count&#x22; is not &#x3e;= 0: %j in %j&#x27;,
+    assert.ok(this.count &gt;= 0,
+        format('rotating-file stream "count" is not &gt;= 0: %j in %j',
             this.count, this));
 
     // Parse `options.period`.
     if (options.period) {
-        // &#x3c;number&#x3e;&#x3c;scope&#x3e; where scope is:
+        // &lt;number&gt;&lt;scope&gt; where scope is:
         //    h   hours (at the start of the hour)
         //    d   days (at the start of the day, i.e. just after midnight)
         //    w   weeks (at the start of Sunday)
         //    m   months (on the first of the month)
         //    y   years (at the start of Jan 1st)
-        // with special values &#x27;hourly&#x27; (1h), &#x27;daily&#x27; (1d), &#x22;weekly&#x22; (1w),
-        // &#x27;monthly&#x27; (1m) and &#x27;yearly&#x27; (1y)
+        // with special values 'hourly' (1h), 'daily' (1d), "weekly" (1w),
+        // 'monthly' (1m) and 'yearly' (1y)
         var period = {
-            &#x27;hourly&#x27;: &#x27;1h&#x27;,
-            &#x27;daily&#x27;: &#x27;1d&#x27;,
-            &#x27;weekly&#x27;: &#x27;1w&#x27;,
-            &#x27;monthly&#x27;: &#x27;1m&#x27;,
-            &#x27;yearly&#x27;: &#x27;1y&#x27;
+            'hourly': '1h',
+            'daily': '1d',
+            'weekly': '1w',
+            'monthly': '1m',
+            'yearly': '1y'
         }[options.period] || options.period;
         var m = /^([1-9][0-9]*)([hdwmy]|ms)$/.exec(period);
         if (!m) {
-            throw new Error(format(&#x27;invalid period: &#x22;%s&#x22;&#x27;, options.period));
+            throw new Error(format('invalid period: "%s"', options.period));
         }
         this.periodNum = Number(m[1]);
         this.periodScope = m[2];
     } else {
         this.periodNum = 1;
-        this.periodScope = &#x27;d&#x27;;
+        this.periodScope = 'd';
     }
 
     var lastModified = null;
@@ -1118,21 +1111,21 @@ streams: [
         lastModified = fileInfo.mtime.getTime();
     }
     catch (err) {
-        // file doesn&#x27;t exist
+        // file doesn't exist
     }
     var rotateAfterOpen = false;
     if (lastModified) {
         var lastRotTime = this._calcRotTime(0);
-        if (lastModified &#x3c; lastRotTime) {
+        if (lastModified &lt; lastRotTime) {
             rotateAfterOpen = true;
         }
     }
 
     // TODO: template support for backup files
-    // template: &#x3c;path to which to rotate&#x3e;
+    // template: &lt;path to which to rotate&gt;
     //      default is %P.%n
-    //      &#x27;/var/log/archive/foo.log&#x27;  -&#x3e; foo.log.%n
-    //      &#x27;/var/log/archive/foo.log.%n&#x27;
+    //      '/var/log/archive/foo.log'  -&gt; foo.log.%n
+    //      '/var/log/archive/foo.log.%n'
     //      codes:
     //          XXX support strftime codes (per node version of those)
     //              or whatever module. Pick non-colliding for extra
@@ -1141,16 +1134,16 @@ streams: [
     //          %n      integer number of rotated log (1,2,3,...)
     //          %d      datetime in YYYY-MM-DD_HH-MM-SS
     //                      XXX what should default date format be?
-    //                          prior art? Want to avoid &#x27;:&#x27; in
+    //                          prior art? Want to avoid ':' in
     //                          filenames (illegal on Windows for one).
 
     this.stream = fs.createWriteStream(this.path,
-        {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+        {flags: 'a', encoding: 'utf8'});
 
     this.rotQueue = [];
     this.rotating = false;
     if (rotateAfterOpen) {
-        this._debug(&#x27;rotateAfterOpen -&#x3e; call rotate()&#x27;);
+        this._debug('rotateAfterOpen -&gt; call rotate()');
         this.rotate();
     } else {
         this._setupNextRot();
@@ -1169,14 +1162,14 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function _calcRotTime(periodOffset) {
-    this._debug(&#x27;_calcRotTime: %s%s&#x27;, this.periodNum, this.periodScope);
+    this._debug('_calcRotTime: %s%s', this.periodNum, this.periodScope);
     var d = new Date();
 
-    this._debug(&#x27;  now local: %s&#x27;, d);
-    this._debug(&#x27;    now utc: %s&#x27;, d.toISOString());
+    this._debug('  now local: %s', d);
+    this._debug('    now utc: %s', d.toISOString());
     var rotAt;
     switch (this.periodScope) {
-    case &#x27;ms&#x27;:
+    case 'ms':
         // Hidden millisecond period for debugging.
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * periodOffset;
@@ -1184,7 +1177,7 @@ streams: [
             rotAt = Date.now() + this.periodNum * periodOffset;
         }
         break;
-    case &#x27;h&#x27;:
+    case 'h':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 60 * 60 * 1000 * periodOffset;
         } else {
@@ -1193,7 +1186,7 @@ streams: [
                 d.getUTCDate(), d.getUTCHours() + periodOffset);
         }
         break;
-    case &#x27;d&#x27;:
+    case 'd':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 24 * 60 * 60 * 1000
                 * periodOffset;
@@ -1203,7 +1196,7 @@ streams: [
                 d.getUTCDate() + periodOffset);
         }
         break;
-    case &#x27;w&#x27;:
+    case 'w':
         // Currently, always on Sunday morning at 00:00:00 (UTC).
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 7 * 24 * 60 * 60 * 1000
@@ -1211,17 +1204,17 @@ streams: [
         } else {
             // First time: this coming Sunday.
             var dayOffset = (7 - d.getUTCDay());
-            if (periodOffset &#x3c; 1) {
+            if (periodOffset &lt; 1) {
                 dayOffset = -d.getUTCDay();
             }
-            if (periodOffset &#x3e; 1 || periodOffset &#x3c; -1) {
+            if (periodOffset &gt; 1 || periodOffset &lt; -1) {
                 dayOffset += 7 * periodOffset;
             }
             rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
                 d.getUTCDate() + dayOffset);
         }
         break;
-    case &#x27;m&#x27;:
+    case 'm':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear(),
                 d.getUTCMonth() + this.periodNum * periodOffset, 1);
@@ -1231,7 +1224,7 @@ streams: [
                 d.getUTCMonth() + periodOffset, 1);
         }
         break;
-    case &#x27;y&#x27;:
+    case 'y':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear() + this.periodNum * periodOffset,
                 0, 1);
@@ -1241,14 +1234,14 @@ streams: [
         }
         break;
     default:
-        assert.fail(format(&#x27;invalid period scope: &#x22;%s&#x22;&#x27;, this.periodScope));
+        assert.fail(format('invalid period scope: "%s"', this.periodScope));
     }
 
     if (this._debug()) {
-        this._debug(&#x27;  **rotAt**: %s (utc: %s)&#x27;, rotAt,
+        this._debug('  **rotAt**: %s (utc: %s)', rotAt,
             new Date(rotAt).toUTCString());
         var now = Date.now();
-        this._debug(&#x27;        now: %s (%sms == %smin == %sh to go)&#x27;,
+        this._debug('        now: %s (%sms == %smin == %sh to go)',
             now,
             rotAt - now,
             (rotAt-now)/1000/60,
@@ -1275,8 +1268,8 @@ streams: [
             return true;
         }
         var args = Array.prototype.slice.call(arguments);
-        args[0] = &#x27;[&#x27; + (new Date().toISOString()) + &#x27;, &#x27;
-            + this.path + &#x27;] &#x27; + args[0];
+        args[0] = '[' + (new Date().toISOString()) + ', '
+            + this.path + '] ' + args[0];
         console.log.apply(this, args);
     } else {
         return false;
@@ -1297,19 +1290,19 @@ streams: [
     <li>description and source-code<pre class="apidocCodePre">RotatingFileStream.prototype._setRotationTimer = function () {
     var self = this;
     var delay = this.rotAt - Date.now();
-    // Cap timeout to Node&#x27;s max setTimeout, see
-    // &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
+    // Cap timeout to Node's max setTimeout, see
+    // &lt;https://github.com/joyent/node/issues/8656&gt;.
     var TIMEOUT_MAX = 2147483647; // 2^31-1
-    if (delay &#x3e; TIMEOUT_MAX) {
+    if (delay &gt; TIMEOUT_MAX) {
         delay = TIMEOUT_MAX;
     }
     this.timeout = setTimeout(
         function () {
-            self._debug(&#x27;_setRotationTimer timeout -&#x3e; call rotate()&#x27;);
+            self._debug('_setRotationTimer timeout -&gt; call rotate()');
             self.rotate();
         },
         delay);
-    if (typeof (this.timeout.unref) === &#x27;function&#x27;) {
+    if (typeof (this.timeout.unref) === 'function') {
         this.timeout.unref();
     }
 }</pre></li>
@@ -1390,27 +1383,27 @@ streams: [
     // XXX What about shutdown?
     var self = this;
 
-    // If rotation period is &#x3e; ~25 days, we have to break into multiple
-    // setTimeout&#x27;s. See &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
-    if (self.rotAt &#x26;&#x26; self.rotAt &#x3e; Date.now()) {
+    // If rotation period is &gt; ~25 days, we have to break into multiple
+    // setTimeout's. See &lt;https://github.com/joyent/node/issues/8656&gt;.
+    if (self.rotAt &amp;&amp; self.rotAt &gt; Date.now()) {
         return self._setRotationTimer();
     }
 
-    this._debug(&#x27;rotate&#x27;);
+    this._debug('rotate');
     if (self.rotating) {
-        throw new TypeError(&#x27;cannot start a rotation when already rotating&#x27;);
+        throw new TypeError('cannot start a rotation when already rotating');
     }
     self.rotating = true;
 
     self.stream.end();  // XXX can do moves sync after this? test at high rate
 
     function del() {
-        var toDel = self.path + &#x27;.&#x27; + String(n - 1);
+        var toDel = self.path + '.' + String(n - 1);
         if (n === 0) {
             toDel = self.path;
         }
         n -= 1;
-        self._debug(&#x27;  rm %s&#x27;, toDel);
+        self._debug('  rm %s', toDel);
         fs.unlink(toDel, function (delErr) {
             //XXX handle err other than not exists
             moves();
@@ -1418,23 +1411,23 @@ streams: [
     }
 
     function moves() {
-        if (self.count === 0 || n &#x3c; 0) {
+        if (self.count === 0 || n &lt; 0) {
             return finish();
         }
         var before = self.path;
-        var after = self.path + &#x27;.&#x27; + String(n);
-        if (n &#x3e; 0) {
-            before += &#x27;.&#x27; + String(n - 1);
+        var after = self.path + '.' + String(n);
+        if (n &gt; 0) {
+            before += '.' + String(n - 1);
         }
         n -= 1;
         fs.exists(before, function (exists) {
             if (!exists) {
                 moves();
             } else {
-                self._debug(&#x27;  mv %s %s&#x27;, before, after);
+                self._debug('  mv %s %s', before, after);
                 mv(before, after, function (mvErr) {
                     if (mvErr) {
-                        self.emit(&#x27;error&#x27;, mvErr);
+                        self.emit('error', mvErr);
                         finish(); // XXX finish here?
                     } else {
                         moves();
@@ -1445,16 +1438,16 @@ streams: [
     }
 
     function finish() {
-        self._debug(&#x27;  open %s&#x27;, self.path);
+        self._debug('  open %s', self.path);
         self.stream = fs.createWriteStream(self.path,
-            {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+            {flags: 'a', encoding: 'utf8'});
         var q = self.rotQueue, len = q.length;
-        for (var i = 0; i &#x3c; len; i++) {
+        for (var i = 0; i &lt; len; i++) {
             self.stream.write(q[i]);
         }
         self.rotQueue = [];
         self.rotating = false;
-        self.emit(&#x27;drain&#x27;);
+        self.emit('drain');
         self._setupNextRot();
     }
 
@@ -1503,9 +1496,9 @@ streams: [
 Bunyan is **a simple and fast JSON logging library** for node.js services:
 
 ```js
-var bunyan = require(&#x27;bunyan&#x27;);
-var log = bunyan.<span class="apidocCodeKeywordSpan">createLogger</span>({name: &#x22;myapp&#x22;});
-log.info(&#x22;hi&#x22;);
+var bunyan = require('bunyan');
+var log = bunyan.<span class="apidocCodeKeywordSpan">createLogger</span>({name: "myapp"});
+log.info("hi");
 ```
 
 and **a `bunyan` CLI tool** for nicely viewing those logs:
@@ -1526,16 +1519,16 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     <li>description and source-code<pre class="apidocCodePre">function resolveLevel(nameOrNum) {
     var level;
     var type = typeof (nameOrNum);
-    if (type === &#x27;string&#x27;) {
+    if (type === 'string') {
         level = levelFromName[nameOrNum.toLowerCase()];
         if (!level) {
-            throw new Error(format(&#x27;unknown level name: &#x22;%s&#x22;&#x27;, nameOrNum));
+            throw new Error(format('unknown level name: "%s"', nameOrNum));
         }
-    } else if (type !== &#x27;number&#x27;) {
-        throw new TypeError(format(&#x27;cannot resolve level: invalid arg (%s):&#x27;,
+    } else if (type !== 'number') {
+        throw new TypeError(format('cannot resolve level: invalid arg (%s):',
             type, nameOrNum));
-    } else if (nameOrNum &#x3c; 0 || Math.floor(nameOrNum) !== nameOrNum) {
-        throw new TypeError(format(&#x27;level is not a positive integer: %s&#x27;,
+    } else if (nameOrNum &lt; 0 || Math.floor(nameOrNum) !== nameOrNum) {
+        throw new TypeError(format('level is not a positive integer: %s',
             nameOrNum));
     } else {
         level = nameOrNum;
@@ -1557,11 +1550,11 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     <li>description and source-code<pre class="apidocCodePre">function safeCyclesSet() {
     var seen = new Set();
     return function (key, val) {
-        if (!val || typeof (val) !== &#x27;object&#x27;) {
+        if (!val || typeof (val) !== 'object') {
             return val;
         }
         if (seen.has(val)) {
-            return &#x27;[Circular]&#x27;;
+            return '[Circular]';
         }
         seen.add(val);
         return val;
@@ -1615,7 +1608,7 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     };
     // Trailers: Skipping for speed. If you need trailers in your app, then
     // make a custom serializer.
-    //if (Object.keys(trailers).length &#x3e; 0) {
+    //if (Object.keys(trailers).length &gt; 0) {
     //  obj.trailers = req.trailers;
     //}
 }</pre></li>
@@ -1713,7 +1706,7 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function RingBuffer(options) {
-    this.limit = options &#x26;&#x26; options.limit ? options.limit : 100;
+    this.limit = options &amp;&amp; options.limit ? options.limit : 100;
     this.writable = true;
     this.records = [];
     EventEmitter.call(this);
@@ -1725,13 +1718,13 @@ To use a RingBuffer:
 
 ```js
 /* Create a ring buffer that stores the last 100 records. */
-var bunyan = require(&#x27;bunyan&#x27;);
+var bunyan = require('bunyan');
 var ringbuffer = new bunyan.<span class="apidocCodeKeywordSpan">RingBuffer</span>({ limit: 100 });
 var log = bunyan.createLogger({
-name: &#x27;foo&#x27;,
+name: 'foo',
 streams: [
     {
-        level: &#x27;info&#x27;,
+        level: 'info',
         stream: process.stdout
     },
 ...</pre></li>
@@ -1768,7 +1761,7 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">destroy = function () {
     this.writable = false;
-    this.emit(&#x27;close&#x27;);
+    this.emit('close');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1798,7 +1791,7 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">end = function () {
-    if (arguments.length &#x3e; 0)
+    if (arguments.length &gt; 0)
         this.write.apply(this, Array.prototype.slice.call(arguments));
     this.writable = false;
 }</pre></li>
@@ -1816,11 +1809,11 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">write = function (record) {
     if (!this.writable)
-        throw (new Error(&#x27;RingBuffer has been ended already&#x27;));
+        throw (new Error('RingBuffer has been ended already'));
 
     this.records.push(record);
 
-    if (this.records.length &#x3e; this.limit)
+    if (this.records.length &gt; this.limit)
         this.records.shift();
 
     return (true);
@@ -1844,7 +1837,7 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">destroy = function () {
     this.writable = false;
-    this.emit(&#x27;close&#x27;);
+    this.emit('close');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1884,7 +1877,7 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">end = function () {
-    if (arguments.length &#x3e; 0)
+    if (arguments.length &gt; 0)
         this.write.apply(this, Array.prototype.slice.call(arguments));
     this.writable = false;
 }</pre></li>
@@ -1907,11 +1900,11 @@ streams: [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">write = function (record) {
     if (!this.writable)
-        throw (new Error(&#x27;RingBuffer has been ended already&#x27;));
+        throw (new Error('RingBuffer has been ended already'));
 
     this.records.push(record);
 
-    if (this.records.length &#x3e; this.limit)
+    if (this.records.length &gt; this.limit)
         this.records.shift();
 
     return (true);
@@ -1937,39 +1930,39 @@ streams: [
     this.path = options.path;
 
     this.count = (options.count == null ? 10 : options.count);
-    assert.equal(typeof (this.count), &#x27;number&#x27;,
-        format(&#x27;rotating-file stream &#x22;count&#x22; is not a number: %j (%s) in %j&#x27;,
+    assert.equal(typeof (this.count), 'number',
+        format('rotating-file stream "count" is not a number: %j (%s) in %j',
             this.count, typeof (this.count), this));
-    assert.ok(this.count &#x3e;= 0,
-        format(&#x27;rotating-file stream &#x22;count&#x22; is not &#x3e;= 0: %j in %j&#x27;,
+    assert.ok(this.count &gt;= 0,
+        format('rotating-file stream "count" is not &gt;= 0: %j in %j',
             this.count, this));
 
     // Parse `options.period`.
     if (options.period) {
-        // &#x3c;number&#x3e;&#x3c;scope&#x3e; where scope is:
+        // &lt;number&gt;&lt;scope&gt; where scope is:
         //    h   hours (at the start of the hour)
         //    d   days (at the start of the day, i.e. just after midnight)
         //    w   weeks (at the start of Sunday)
         //    m   months (on the first of the month)
         //    y   years (at the start of Jan 1st)
-        // with special values &#x27;hourly&#x27; (1h), &#x27;daily&#x27; (1d), &#x22;weekly&#x22; (1w),
-        // &#x27;monthly&#x27; (1m) and &#x27;yearly&#x27; (1y)
+        // with special values 'hourly' (1h), 'daily' (1d), "weekly" (1w),
+        // 'monthly' (1m) and 'yearly' (1y)
         var period = {
-            &#x27;hourly&#x27;: &#x27;1h&#x27;,
-            &#x27;daily&#x27;: &#x27;1d&#x27;,
-            &#x27;weekly&#x27;: &#x27;1w&#x27;,
-            &#x27;monthly&#x27;: &#x27;1m&#x27;,
-            &#x27;yearly&#x27;: &#x27;1y&#x27;
+            'hourly': '1h',
+            'daily': '1d',
+            'weekly': '1w',
+            'monthly': '1m',
+            'yearly': '1y'
         }[options.period] || options.period;
         var m = /^([1-9][0-9]*)([hdwmy]|ms)$/.exec(period);
         if (!m) {
-            throw new Error(format(&#x27;invalid period: &#x22;%s&#x22;&#x27;, options.period));
+            throw new Error(format('invalid period: "%s"', options.period));
         }
         this.periodNum = Number(m[1]);
         this.periodScope = m[2];
     } else {
         this.periodNum = 1;
-        this.periodScope = &#x27;d&#x27;;
+        this.periodScope = 'd';
     }
 
     var lastModified = null;
@@ -1978,21 +1971,21 @@ streams: [
         lastModified = fileInfo.mtime.getTime();
     }
     catch (err) {
-        // file doesn&#x27;t exist
+        // file doesn't exist
     }
     var rotateAfterOpen = false;
     if (lastModified) {
         var lastRotTime = this._calcRotTime(0);
-        if (lastModified &#x3c; lastRotTime) {
+        if (lastModified &lt; lastRotTime) {
             rotateAfterOpen = true;
         }
     }
 
     // TODO: template support for backup files
-    // template: &#x3c;path to which to rotate&#x3e;
+    // template: &lt;path to which to rotate&gt;
     //      default is %P.%n
-    //      &#x27;/var/log/archive/foo.log&#x27;  -&#x3e; foo.log.%n
-    //      &#x27;/var/log/archive/foo.log.%n&#x27;
+    //      '/var/log/archive/foo.log'  -&gt; foo.log.%n
+    //      '/var/log/archive/foo.log.%n'
     //      codes:
     //          XXX support strftime codes (per node version of those)
     //              or whatever module. Pick non-colliding for extra
@@ -2001,16 +1994,16 @@ streams: [
     //          %n      integer number of rotated log (1,2,3,...)
     //          %d      datetime in YYYY-MM-DD_HH-MM-SS
     //                      XXX what should default date format be?
-    //                          prior art? Want to avoid &#x27;:&#x27; in
+    //                          prior art? Want to avoid ':' in
     //                          filenames (illegal on Windows for one).
 
     this.stream = fs.createWriteStream(this.path,
-        {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+        {flags: 'a', encoding: 'utf8'});
 
     this.rotQueue = [];
     this.rotating = false;
     if (rotateAfterOpen) {
-        this._debug(&#x27;rotateAfterOpen -&#x3e; call rotate()&#x27;);
+        this._debug('rotateAfterOpen -&gt; call rotate()');
         this.rotate();
     } else {
         this._setupNextRot();
@@ -2049,14 +2042,14 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function _calcRotTime(periodOffset) {
-    this._debug(&#x27;_calcRotTime: %s%s&#x27;, this.periodNum, this.periodScope);
+    this._debug('_calcRotTime: %s%s', this.periodNum, this.periodScope);
     var d = new Date();
 
-    this._debug(&#x27;  now local: %s&#x27;, d);
-    this._debug(&#x27;    now utc: %s&#x27;, d.toISOString());
+    this._debug('  now local: %s', d);
+    this._debug('    now utc: %s', d.toISOString());
     var rotAt;
     switch (this.periodScope) {
-    case &#x27;ms&#x27;:
+    case 'ms':
         // Hidden millisecond period for debugging.
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * periodOffset;
@@ -2064,7 +2057,7 @@ streams: [
             rotAt = Date.now() + this.periodNum * periodOffset;
         }
         break;
-    case &#x27;h&#x27;:
+    case 'h':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 60 * 60 * 1000 * periodOffset;
         } else {
@@ -2073,7 +2066,7 @@ streams: [
                 d.getUTCDate(), d.getUTCHours() + periodOffset);
         }
         break;
-    case &#x27;d&#x27;:
+    case 'd':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 24 * 60 * 60 * 1000
                 * periodOffset;
@@ -2083,7 +2076,7 @@ streams: [
                 d.getUTCDate() + periodOffset);
         }
         break;
-    case &#x27;w&#x27;:
+    case 'w':
         // Currently, always on Sunday morning at 00:00:00 (UTC).
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 7 * 24 * 60 * 60 * 1000
@@ -2091,17 +2084,17 @@ streams: [
         } else {
             // First time: this coming Sunday.
             var dayOffset = (7 - d.getUTCDay());
-            if (periodOffset &#x3c; 1) {
+            if (periodOffset &lt; 1) {
                 dayOffset = -d.getUTCDay();
             }
-            if (periodOffset &#x3e; 1 || periodOffset &#x3c; -1) {
+            if (periodOffset &gt; 1 || periodOffset &lt; -1) {
                 dayOffset += 7 * periodOffset;
             }
             rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
                 d.getUTCDate() + dayOffset);
         }
         break;
-    case &#x27;m&#x27;:
+    case 'm':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear(),
                 d.getUTCMonth() + this.periodNum * periodOffset, 1);
@@ -2111,7 +2104,7 @@ streams: [
                 d.getUTCMonth() + periodOffset, 1);
         }
         break;
-    case &#x27;y&#x27;:
+    case 'y':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear() + this.periodNum * periodOffset,
                 0, 1);
@@ -2121,14 +2114,14 @@ streams: [
         }
         break;
     default:
-        assert.fail(format(&#x27;invalid period scope: &#x22;%s&#x22;&#x27;, this.periodScope));
+        assert.fail(format('invalid period scope: "%s"', this.periodScope));
     }
 
     if (this._debug()) {
-        this._debug(&#x27;  **rotAt**: %s (utc: %s)&#x27;, rotAt,
+        this._debug('  **rotAt**: %s (utc: %s)', rotAt,
             new Date(rotAt).toUTCString());
         var now = Date.now();
-        this._debug(&#x27;        now: %s (%sms == %smin == %sh to go)&#x27;,
+        this._debug('        now: %s (%sms == %smin == %sh to go)',
             now,
             rotAt - now,
             (rotAt-now)/1000/60,
@@ -2155,8 +2148,8 @@ streams: [
             return true;
         }
         var args = Array.prototype.slice.call(arguments);
-        args[0] = &#x27;[&#x27; + (new Date().toISOString()) + &#x27;, &#x27;
-            + this.path + &#x27;] &#x27; + args[0];
+        args[0] = '[' + (new Date().toISOString()) + ', '
+            + this.path + '] ' + args[0];
         console.log.apply(this, args);
     } else {
         return false;
@@ -2177,19 +2170,19 @@ streams: [
     <li>description and source-code<pre class="apidocCodePre">_setRotationTimer = function () {
     var self = this;
     var delay = this.rotAt - Date.now();
-    // Cap timeout to Node&#x27;s max setTimeout, see
-    // &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
+    // Cap timeout to Node's max setTimeout, see
+    // &lt;https://github.com/joyent/node/issues/8656&gt;.
     var TIMEOUT_MAX = 2147483647; // 2^31-1
-    if (delay &#x3e; TIMEOUT_MAX) {
+    if (delay &gt; TIMEOUT_MAX) {
         delay = TIMEOUT_MAX;
     }
     this.timeout = setTimeout(
         function () {
-            self._debug(&#x27;_setRotationTimer timeout -&#x3e; call rotate()&#x27;);
+            self._debug('_setRotationTimer timeout -&gt; call rotate()');
             self.rotate();
         },
         delay);
-    if (typeof (this.timeout.unref) === &#x27;function&#x27;) {
+    if (typeof (this.timeout.unref) === 'function') {
         this.timeout.unref();
     }
 }</pre></li>
@@ -2270,27 +2263,27 @@ streams: [
     // XXX What about shutdown?
     var self = this;
 
-    // If rotation period is &#x3e; ~25 days, we have to break into multiple
-    // setTimeout&#x27;s. See &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
-    if (self.rotAt &#x26;&#x26; self.rotAt &#x3e; Date.now()) {
+    // If rotation period is &gt; ~25 days, we have to break into multiple
+    // setTimeout's. See &lt;https://github.com/joyent/node/issues/8656&gt;.
+    if (self.rotAt &amp;&amp; self.rotAt &gt; Date.now()) {
         return self._setRotationTimer();
     }
 
-    this._debug(&#x27;rotate&#x27;);
+    this._debug('rotate');
     if (self.rotating) {
-        throw new TypeError(&#x27;cannot start a rotation when already rotating&#x27;);
+        throw new TypeError('cannot start a rotation when already rotating');
     }
     self.rotating = true;
 
     self.stream.end();  // XXX can do moves sync after this? test at high rate
 
     function del() {
-        var toDel = self.path + &#x27;.&#x27; + String(n - 1);
+        var toDel = self.path + '.' + String(n - 1);
         if (n === 0) {
             toDel = self.path;
         }
         n -= 1;
-        self._debug(&#x27;  rm %s&#x27;, toDel);
+        self._debug('  rm %s', toDel);
         fs.unlink(toDel, function (delErr) {
             //XXX handle err other than not exists
             moves();
@@ -2298,23 +2291,23 @@ streams: [
     }
 
     function moves() {
-        if (self.count === 0 || n &#x3c; 0) {
+        if (self.count === 0 || n &lt; 0) {
             return finish();
         }
         var before = self.path;
-        var after = self.path + &#x27;.&#x27; + String(n);
-        if (n &#x3e; 0) {
-            before += &#x27;.&#x27; + String(n - 1);
+        var after = self.path + '.' + String(n);
+        if (n &gt; 0) {
+            before += '.' + String(n - 1);
         }
         n -= 1;
         fs.exists(before, function (exists) {
             if (!exists) {
                 moves();
             } else {
-                self._debug(&#x27;  mv %s %s&#x27;, before, after);
+                self._debug('  mv %s %s', before, after);
                 mv(before, after, function (mvErr) {
                     if (mvErr) {
-                        self.emit(&#x27;error&#x27;, mvErr);
+                        self.emit('error', mvErr);
                         finish(); // XXX finish here?
                     } else {
                         moves();
@@ -2325,16 +2318,16 @@ streams: [
     }
 
     function finish() {
-        self._debug(&#x27;  open %s&#x27;, self.path);
+        self._debug('  open %s', self.path);
         self.stream = fs.createWriteStream(self.path,
-            {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+            {flags: 'a', encoding: 'utf8'});
         var q = self.rotQueue, len = q.length;
-        for (var i = 0; i &#x3c; len; i++) {
+        for (var i = 0; i &lt; len; i++) {
             self.stream.write(q[i]);
         }
         self.rotQueue = [];
         self.rotating = false;
-        self.emit(&#x27;drain&#x27;);
+        self.emit('drain');
         self._setupNextRot();
     }
 
@@ -2379,14 +2372,14 @@ streams: [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function _calcRotTime(periodOffset) {
-    this._debug(&#x27;_calcRotTime: %s%s&#x27;, this.periodNum, this.periodScope);
+    this._debug('_calcRotTime: %s%s', this.periodNum, this.periodScope);
     var d = new Date();
 
-    this._debug(&#x27;  now local: %s&#x27;, d);
-    this._debug(&#x27;    now utc: %s&#x27;, d.toISOString());
+    this._debug('  now local: %s', d);
+    this._debug('    now utc: %s', d.toISOString());
     var rotAt;
     switch (this.periodScope) {
-    case &#x27;ms&#x27;:
+    case 'ms':
         // Hidden millisecond period for debugging.
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * periodOffset;
@@ -2394,7 +2387,7 @@ streams: [
             rotAt = Date.now() + this.periodNum * periodOffset;
         }
         break;
-    case &#x27;h&#x27;:
+    case 'h':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 60 * 60 * 1000 * periodOffset;
         } else {
@@ -2403,7 +2396,7 @@ streams: [
                 d.getUTCDate(), d.getUTCHours() + periodOffset);
         }
         break;
-    case &#x27;d&#x27;:
+    case 'd':
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 24 * 60 * 60 * 1000
                 * periodOffset;
@@ -2413,7 +2406,7 @@ streams: [
                 d.getUTCDate() + periodOffset);
         }
         break;
-    case &#x27;w&#x27;:
+    case 'w':
         // Currently, always on Sunday morning at 00:00:00 (UTC).
         if (this.rotAt) {
             rotAt = this.rotAt + this.periodNum * 7 * 24 * 60 * 60 * 1000
@@ -2421,17 +2414,17 @@ streams: [
         } else {
             // First time: this coming Sunday.
             var dayOffset = (7 - d.getUTCDay());
-            if (periodOffset &#x3c; 1) {
+            if (periodOffset &lt; 1) {
                 dayOffset = -d.getUTCDay();
             }
-            if (periodOffset &#x3e; 1 || periodOffset &#x3c; -1) {
+            if (periodOffset &gt; 1 || periodOffset &lt; -1) {
                 dayOffset += 7 * periodOffset;
             }
             rotAt = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(),
                 d.getUTCDate() + dayOffset);
         }
         break;
-    case &#x27;m&#x27;:
+    case 'm':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear(),
                 d.getUTCMonth() + this.periodNum * periodOffset, 1);
@@ -2441,7 +2434,7 @@ streams: [
                 d.getUTCMonth() + periodOffset, 1);
         }
         break;
-    case &#x27;y&#x27;:
+    case 'y':
         if (this.rotAt) {
             rotAt = Date.UTC(d.getUTCFullYear() + this.periodNum * periodOffset,
                 0, 1);
@@ -2451,14 +2444,14 @@ streams: [
         }
         break;
     default:
-        assert.fail(format(&#x27;invalid period scope: &#x22;%s&#x22;&#x27;, this.periodScope));
+        assert.fail(format('invalid period scope: "%s"', this.periodScope));
     }
 
     if (this._debug()) {
-        this._debug(&#x27;  **rotAt**: %s (utc: %s)&#x27;, rotAt,
+        this._debug('  **rotAt**: %s (utc: %s)', rotAt,
             new Date(rotAt).toUTCString());
         var now = Date.now();
-        this._debug(&#x27;        now: %s (%sms == %smin == %sh to go)&#x27;,
+        this._debug('        now: %s (%sms == %smin == %sh to go)',
             now,
             rotAt - now,
             (rotAt-now)/1000/60,
@@ -2490,8 +2483,8 @@ streams: [
             return true;
         }
         var args = Array.prototype.slice.call(arguments);
-        args[0] = &#x27;[&#x27; + (new Date().toISOString()) + &#x27;, &#x27;
-            + this.path + &#x27;] &#x27; + args[0];
+        args[0] = '[' + (new Date().toISOString()) + ', '
+            + this.path + '] ' + args[0];
         console.log.apply(this, args);
     } else {
         return false;
@@ -2517,19 +2510,19 @@ streams: [
     <li>description and source-code<pre class="apidocCodePre">_setRotationTimer = function () {
     var self = this;
     var delay = this.rotAt - Date.now();
-    // Cap timeout to Node&#x27;s max setTimeout, see
-    // &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
+    // Cap timeout to Node's max setTimeout, see
+    // &lt;https://github.com/joyent/node/issues/8656&gt;.
     var TIMEOUT_MAX = 2147483647; // 2^31-1
-    if (delay &#x3e; TIMEOUT_MAX) {
+    if (delay &gt; TIMEOUT_MAX) {
         delay = TIMEOUT_MAX;
     }
     this.timeout = setTimeout(
         function () {
-            self._debug(&#x27;_setRotationTimer timeout -&#x3e; call rotate()&#x27;);
+            self._debug('_setRotationTimer timeout -&gt; call rotate()');
             self.rotate();
         },
         delay);
-    if (typeof (this.timeout.unref) === &#x27;function&#x27;) {
+    if (typeof (this.timeout.unref) === 'function') {
         this.timeout.unref();
     }
 }</pre></li>
@@ -2635,27 +2628,27 @@ streams: [
     // XXX What about shutdown?
     var self = this;
 
-    // If rotation period is &#x3e; ~25 days, we have to break into multiple
-    // setTimeout&#x27;s. See &#x3c;https://github.com/joyent/node/issues/8656&#x3e;.
-    if (self.rotAt &#x26;&#x26; self.rotAt &#x3e; Date.now()) {
+    // If rotation period is &gt; ~25 days, we have to break into multiple
+    // setTimeout's. See &lt;https://github.com/joyent/node/issues/8656&gt;.
+    if (self.rotAt &amp;&amp; self.rotAt &gt; Date.now()) {
         return self._setRotationTimer();
     }
 
-    this._debug(&#x27;rotate&#x27;);
+    this._debug('rotate');
     if (self.rotating) {
-        throw new TypeError(&#x27;cannot start a rotation when already rotating&#x27;);
+        throw new TypeError('cannot start a rotation when already rotating');
     }
     self.rotating = true;
 
     self.stream.end();  // XXX can do moves sync after this? test at high rate
 
     function del() {
-        var toDel = self.path + &#x27;.&#x27; + String(n - 1);
+        var toDel = self.path + '.' + String(n - 1);
         if (n === 0) {
             toDel = self.path;
         }
         n -= 1;
-        self._debug(&#x27;  rm %s&#x27;, toDel);
+        self._debug('  rm %s', toDel);
         fs.unlink(toDel, function (delErr) {
             //XXX handle err other than not exists
             moves();
@@ -2663,23 +2656,23 @@ streams: [
     }
 
     function moves() {
-        if (self.count === 0 || n &#x3c; 0) {
+        if (self.count === 0 || n &lt; 0) {
             return finish();
         }
         var before = self.path;
-        var after = self.path + &#x27;.&#x27; + String(n);
-        if (n &#x3e; 0) {
-            before += &#x27;.&#x27; + String(n - 1);
+        var after = self.path + '.' + String(n);
+        if (n &gt; 0) {
+            before += '.' + String(n - 1);
         }
         n -= 1;
         fs.exists(before, function (exists) {
             if (!exists) {
                 moves();
             } else {
-                self._debug(&#x27;  mv %s %s&#x27;, before, after);
+                self._debug('  mv %s %s', before, after);
                 mv(before, after, function (mvErr) {
                     if (mvErr) {
-                        self.emit(&#x27;error&#x27;, mvErr);
+                        self.emit('error', mvErr);
                         finish(); // XXX finish here?
                     } else {
                         moves();
@@ -2690,16 +2683,16 @@ streams: [
     }
 
     function finish() {
-        self._debug(&#x27;  open %s&#x27;, self.path);
+        self._debug('  open %s', self.path);
         self.stream = fs.createWriteStream(self.path,
-            {flags: &#x27;a&#x27;, encoding: &#x27;utf8&#x27;});
+            {flags: 'a', encoding: 'utf8'});
         var q = self.rotQueue, len = q.length;
-        for (var i = 0; i &#x3c; len; i++) {
+        for (var i = 0; i &lt; len; i++) {
             self.stream.write(q[i]);
         }
         self.rotQueue = [];
         self.rotating = false;
-        self.emit(&#x27;drain&#x27;);
+        self.emit('drain');
         self._setupNextRot();
     }
 
@@ -2758,9 +2751,9 @@ streams: [
 Bunyan is **a simple and fast JSON logging library** for node.js services:
 
 ```js
-var bunyan = require(&#x27;bunyan&#x27;);
-var log = bunyan.<span class="apidocCodeKeywordSpan">createLogger</span>({name: &#x22;myapp&#x22;});
-log.info(&#x22;hi&#x22;);
+var bunyan = require('bunyan');
+var log = bunyan.<span class="apidocCodeKeywordSpan">createLogger</span>({name: "myapp"});
+log.info("hi");
 ```
 
 and **a `bunyan` CLI tool** for nicely viewing those logs:
@@ -2786,16 +2779,16 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     <li>description and source-code<pre class="apidocCodePre">function resolveLevel(nameOrNum) {
     var level;
     var type = typeof (nameOrNum);
-    if (type === &#x27;string&#x27;) {
+    if (type === 'string') {
         level = levelFromName[nameOrNum.toLowerCase()];
         if (!level) {
-            throw new Error(format(&#x27;unknown level name: &#x22;%s&#x22;&#x27;, nameOrNum));
+            throw new Error(format('unknown level name: "%s"', nameOrNum));
         }
-    } else if (type !== &#x27;number&#x27;) {
-        throw new TypeError(format(&#x27;cannot resolve level: invalid arg (%s):&#x27;,
+    } else if (type !== 'number') {
+        throw new TypeError(format('cannot resolve level: invalid arg (%s):',
             type, nameOrNum));
-    } else if (nameOrNum &#x3c; 0 || Math.floor(nameOrNum) !== nameOrNum) {
-        throw new TypeError(format(&#x27;level is not a positive integer: %s&#x27;,
+    } else if (nameOrNum &lt; 0 || Math.floor(nameOrNum) !== nameOrNum) {
+        throw new TypeError(format('level is not a positive integer: %s',
             nameOrNum));
     } else {
         level = nameOrNum;
@@ -2822,11 +2815,11 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     <li>description and source-code<pre class="apidocCodePre">function safeCyclesSet() {
     var seen = new Set();
     return function (key, val) {
-        if (!val || typeof (val) !== &#x27;object&#x27;) {
+        if (!val || typeof (val) !== 'object') {
             return val;
         }
         if (seen.has(val)) {
-            return &#x27;[Circular]&#x27;;
+            return '[Circular]';
         }
         seen.add(val);
         return val;
@@ -2885,7 +2878,7 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     };
     // Trailers: Skipping for speed. If you need trailers in your app, then
     // make a custom serializer.
-    //if (Object.keys(trailers).length &#x3e; 0) {
+    //if (Object.keys(trailers).length &gt; 0) {
     //  obj.trailers = req.trailers;
     //}
 }</pre></li>
@@ -2967,7 +2960,7 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     };
     // Trailers: Skipping for speed. If you need trailers in your app, then
     // make a custom serializer.
-    //if (Object.keys(trailers).length &#x3e; 0) {
+    //if (Object.keys(trailers).length &gt; 0) {
     //  obj.trailers = req.trailers;
     //}
 }</pre></li>
@@ -3026,3 +3019,4 @@ and **a `bunyan` CLI tool** for nicely viewing those logs:
     ]
 </div>
 </div>
+</body></html>
