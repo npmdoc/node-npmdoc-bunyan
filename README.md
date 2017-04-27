@@ -1,6 +1,6 @@
 # npmdoc-bunyan
 
-#### api documentation for  [bunyan (v1.8.10)](https://github.com/trentm/node-bunyan#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-bunyan.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bunyan) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bunyan.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bunyan)
+#### basic api documentation for  [bunyan (v1.8.10)](https://github.com/trentm/node-bunyan#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-bunyan.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-bunyan) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-bunyan.svg)](https://travis-ci.org/npmdoc/node-npmdoc-bunyan)
 
 #### a JSON logging library for node.js services
 
